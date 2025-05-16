@@ -83,19 +83,35 @@
         }
 
         .nav-links a {
-            text-decoration: none;
-            font-family: "Josefin Sans", sans-serif;
-            color: #383838;
-            font-weight: 600;
-            font-size: 17px;
-            transition: color 0.3s ease;
-            margin-top: 4px;
+    position: relative;
+    text-decoration: none;
+    font-family: "Josefin Sans", sans-serif;
+    color: #383838;
+    font-weight: 600;
+    font-size: 17px;
+    transition: color 0.3s ease;
+    margin-top: 4px;
+}
 
-        }
+.nav-links a::after {
+    content: "";
+    position: absolute;
+    left: 0;
+    bottom: -2px; /* Adjust distance from text */
+    width: 0;
+    height: 1.5px;
+    background-color: var(--accent); /* Change this for custom color */
+    transition: width 0.4s ease, background-color 0.3s ease;
+}
 
-        .nav-links a:hover {
-            color: var(--accent);
-        }
+.nav-links a:hover {
+    color: #5a5a5a;
+}
+
+.nav-links a:hover::after {
+    width: 100%;
+    background-color: #383838; /* You can change this to another variable or value */
+}
 
         .header-actions {
             display: flex;
@@ -2127,150 +2143,6 @@ document.addEventListener('DOMContentLoaded', function() {
               </div>
             </div>
           </section>
-    
-            <section class="zero-section">
-    <div class="center-icon">
-      <i class="fab fa-youtube"></i>
-    </div>
-    <div class="rotating-text" id="rotatingText"></div>
-  </section>
-<script>
-    const text = "HASEEB COLLECTION PAKISTAN• ";
-    const rotatingText = document.getElementById("rotatingText");
-
-    for (let i = 0; i < text.length; i++) {
-      const span = document.createElement("span");
-      span.innerText = text[i];
-      const rotation = (i * 360) / text.length;
-      span.style.setProperty('--rotation', `${rotation}deg`);
-      span.style.transform = `rotate(${rotation}deg) translateX(100px)`;
-      rotatingText.appendChild(span);
-    }
-</script>
-<style>
-    .zero-section {
-  position: relative;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  flex-direction: column;
-  background: url('banner.jpg');
-  background-size: contain; /* Changed from cover to contain */
-  background-position: center;
-  background-repeat: no-repeat;
-  height: 100vh; /* Changed to full viewport height */
-  width: 100%;
-  overflow: hidden;
-}
-
-.center-icon {
-  position: relative;
-  width: 100px;
-  height: 100px;
-  z-index: 2;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-}
-
-.center-icon i {
-  font-size: 60px;
-  color: rgb(255, 255, 255);
-  cursor: pointer;
-}
-
-@keyframes bounce {
-  0%, 100% { transform: translateY(0); }
-  50% { transform: translateY(8px); }
-}
-
-.rotating-text {
-  position: absolute;
-  top: 50%;
-  left: 50%;
-  transform: translate(-40%, -40%);
-  width: 200px;
-  height: 200px;
-  font-weight: bold;
-  animation: rotateText 10s linear infinite;
-  pointer-events: none;
-}
-
-.rotating-text span {
-  font-weight: bold;
-  position: absolute;
-  left: 50%;
-  top: 50%;
-  transform-origin: 0 0;
-  font-size: 14px;
-  color: #ffffff;
-  letter-spacing: -1px;
-}
-
-@keyframes rotateText {
-  from {
-    transform: translate(-50%, -50%) rotate(0deg);
-  }
-  to {
-    transform: translate(-50%, -50%) rotate(360deg);
-  }
-}
-/* Mobile Adjustments */
-@media (max-width: 768px) {
-  .zero-section {
-    background-size: contain;
-  }
-
-  .center-icon {
-    width: 70px;
-    height: 70px;
-  }
-
-  .center-icon i {
-    font-size: 40px;
-  }
-
-  .rotating-text {
-    width: 90px; /* Slightly smaller container */
-    height: 90px;
-  }
-
-  .rotating-text span {
-    font-size: 10px;
-    transform-origin: 0 0;
-    transform: rotate(var(--rotation)) translateX(30px); /* Was 75px */
-  }
-}
-
-@media (max-width: 480px) {
-  .zero-section {
-    background-size: 100% 280px;
-  }
-
-  .center-icon {
-    width: 60px;
-    height: 60px;
-  }
-
-  .center-icon i {
-    font-size: 35px;
-  }
-
-  .rotating-text {
-    width: 50px;
-    height: 20px;
-  }
-
-  .rotating-text span {
-    font-size: 11px;
-    transform: rotate(var(--rotation)) translateX(18px); /* Was 18px, adjust this based on testing */
-  }
-
-  .triangle-icon {
-    font-size: 20px;
-  }
-}
-</style>
 
         <!-- Contact Section -->
         <section class="contact-section" id="contact-section">
@@ -2462,7 +2334,7 @@ document.addEventListener('DOMContentLoaded', function() {
                     <div class="newsletter">
                         <p>Subscribe for updates and exclusive offers</p>
                         <input type="email" placeholder="Your Email">
-                          <button type="submit" onclick="showToast()">Subscribe</button>
+                          <button type="submit">Subscribe</button>
 
     <!-- Fake toaster -->
     <div id="toast" class="toast">Subscribed Successfully!</div>
