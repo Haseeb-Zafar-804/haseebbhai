@@ -2158,111 +2158,68 @@ document.addEventListener('DOMContentLoaded', function() {
   background-size: cover;
   background-position: center;
   background-repeat: no-repeat;
-  height: 90vh;
+  height: 100vh; /* Changed from 90vh to 100vh for full viewport height */
+  width: 100%;
 }
 
-    .center-icon {
-      position: relative;
-      width: 100px;
-      height: 100px;
-      z-index: 2;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-    }
+/* ... (keep your existing styles for center-icon and rotating-text) ... */
 
-    .center-icon i {
-      font-size: 60px;
-      color: rgb(255, 255, 255);
-      cursor: pointer;
-    }
+/* Mobile Adjustments */
+@media (max-width: 768px) {
+  .zero-section {
+    height: 100vh; /* Ensure full height on mobile */
+    background-attachment: fixed; /* Optional: makes background fixed while scrolling */
+  }
+  
+  .center-icon {
+    width: 70px;
+    height: 70px;
+  }
 
+  .center-icon i {
+    font-size: 40px;
+  }
 
-    @keyframes bounce {
-      0%, 100% { transform: translateY(0); }
-      50% { transform: translateY(8px); }
-    }
+  .rotating-text {
+    width: 150px;
+    height: 150px;
+  }
 
-    .rotating-text {
-      position: absolute;
-      top: 50%;
-      left: 50%;
-      transform: translate(-50%, -50%);
-      width: 200px;
-      height: 200px;
-      font-weight: bold;
-      animation: rotateText 10s linear infinite;
-      pointer-events: none;
-    }
+  .rotating-text span {
+    font-size: 10px;
+    transform-origin: 0 0;
+    transform: rotate(var(--rotation)) translateX(75px) !important;
+  }
+}
 
-    .rotating-text span {
-      font-weight: bold;
-      position: absolute;
-      left: 50%;
-      top: 50%;
-      transform-origin: 0 0;
-      font-size: 14px;
-    color: #ffffff;
+@media (max-width: 480px) {
+  .zero-section {
+    height: 100vh; /* Ensure full height on smaller mobile */
+  }
+  
+  .center-icon {
+    width: 60px;
+    height: 60px;
+  }
 
-      letter-spacing: -1px;
-    }
+  .center-icon i {
+    font-size: 35px;
+  }
 
-    @keyframes rotateText {
-      from {
-        transform: translate(-50%, -50%) rotate(0deg);
-      }
-      to {
-        transform: translate(-50%, -50%) rotate(360deg);
-      }
-    }
+  .rotating-text {
+    width: 130px;
+    height: 130px;
+  }
 
-    /* Mobile Adjustments */
-    @media (max-width: 768px) {
-      .center-icon {
-        width: 70px;
-        height: 70px;
-      }
+  .rotating-text span {
+    font-size: 9px;
+    transform: rotate(var(--rotation)) translateX(65px) !important;
+  }
 
-      .center-icon i {
-        font-size: 40px;
-      }
-
-      .rotating-text {
-        width: 150px;
-        height: 150px;
-      }
-
-      .rotating-text span {
-        font-size: 10px;
-        transform-origin: 0 0;
-        transform: rotate(var(--rotation)) translateX(75px) !important;
-      }
-    }
-
-    @media (max-width: 480px) {
-      .center-icon {
-        width: 60px;
-        height: 60px;
-      }
-
-      .center-icon i {
-        font-size: 35px;
-      }
-
-      .rotating-text {
-        width: 130px;
-        height: 130px;
-      }
-
-      .rotating-text span {
-        font-size: 9px;
-        transform: rotate(var(--rotation)) translateX(65px) !important;
-      }
-
-      .triangle-icon {
-        font-size: 20px;
-      }
-    }
+  .triangle-icon {
+    font-size: 20px;
+  }
+}
 </style>
 
         <!-- Contact Section -->
