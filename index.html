@@ -1,9 +1,12 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
+   <head>
+        <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Haseeb-Collection | Premium Bedsheets & Luxury Bedding</title>
+
+  <title>Haseeb-Collection | Premium Bedsheets & Luxury Bedding</title>
+  <link rel="icon" type="image/png" href="logo.png">
+</head>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <link rel="stylesheet" href="https://site-assets.fontawesome.com/releases/v6.4.2/css/all.css">
     <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -1533,7 +1536,49 @@ h5{
                 min-height: 450px;
                 text-align: left;
             }
-        }      
+        }
+
+     #backToTop {
+            position: fixed;
+            bottom: 30px;
+            right: 30px;
+            width: 50px;
+            height: 50px;
+            background: #fff;
+            border-radius: 50%;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.2);
+            cursor: pointer;
+            display: none;
+            justify-content: center;
+            align-items: center;
+            z-index: 1000;
+        }
+        
+        #backToTop::before {
+            content: '↑';
+            font-size: 24px;
+            color: #333;
+            position: relative;
+            z-index: 2;
+        }
+        
+        .progress-ring {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            top: 0;
+            left: 0;
+            transform: rotate(-90deg);
+        }
+        
+        .progress-ring-circle {
+            fill: none;
+            stroke: #383838;
+            stroke-width: 2;
+            stroke-dasharray: 157; /* Circumference of a 50px circle (2πr) */
+            stroke-dashoffset: 157;
+            transition: stroke-dashoffset 0.2s linear;
+        }
     </style>
 </head>
 <body>
@@ -1589,10 +1634,65 @@ h5{
         <section class="hero" id="home-section">
             <div class="hero-content">
                 <h1>Summer Collection 2025</h1>
-                <p>Discover our Premium streetwear essentials designed for urban explorers.</p>
-                <button class="btn" onclick="scrollToSection('#products-section')">Shop Now</button>
+                 <p class="static-text">
+  In Haseeb Collection  <span id="typing-text"></span>
+</p>
+<br>
+<button class="btn" onclick="scrollToSection('#products-section')">Shop Now</button>
+
             </div>
         </section><br><br>
+        <script>
+             // Simple Auto Typing Animation
+       // Simple Auto Typing Animation (FASTER VERSION)
+const messages = [
+    "discover our Premium streetwear essentials.",
+    "elevate your urban fashion style.",
+    "limited edition designer pieces."
+];
+
+const typingElement = document.getElementById('typing-text');
+let messageIndex = 0;
+let charIndex = 0;
+let isDeleting = false;
+let typingSpeed = 50; // Reduced from 100 (typing speed)
+let pauseBetween = 1000; // Reduced from 2000 (pause at end)
+
+function typeWriter() {
+    const currentMessage = messages[messageIndex];
+    
+    if (isDeleting) {
+        typingElement.textContent = currentMessage.substring(0, charIndex - 1);
+        charIndex--;
+        typingSpeed = 25; // Faster deleting (was 50)
+    } else {
+        typingElement.textContent = currentMessage.substring(0, charIndex + 1);
+        charIndex++;
+        typingSpeed = 50; // Faster typing (was 100)
+    }
+    
+    if (!isDeleting && charIndex === currentMessage.length) {
+        typingSpeed = pauseBetween;
+        isDeleting = true;
+    } else if (isDeleting && charIndex === 0) {
+        isDeleting = false;
+        messageIndex = (messageIndex + 1) % messages.length;
+        typingSpeed = 250; // Faster between messages (was 500)
+    }
+    
+    setTimeout(typeWriter, typingSpeed);
+}
+
+// Start animation
+window.addEventListener('DOMContentLoaded', () => {
+    setTimeout(typeWriter, 500); // Shorter initial delay (was 1000)
+});
+        </script>
+ <div id="backToTop">
+        <svg class="progress-ring" viewBox="0 0 50 50">
+            <circle class="progress-ring-circle" cx="25" cy="25" r="24"></circle>
+        </svg>
+    </div>
 
 
          <h2 class="section-title" style="font-weight: 500;">EXPLORE OUR COLLECTION</h2><br><br>
@@ -2156,10 +2256,9 @@ document.addEventListener('DOMContentLoaded', function() {
             <div class="contact-container">
                 <div class="contact-info">
                     <h3>Get in Touch</h3>
-                    <p><i class="fa-regular fa-map-marker-alt"></i>S11, Quba Masjid, Orangi, Karachi</p>
                     <p><i class="fa-regular fa-phone"></i> +92 3412825465</p>
                     <p><i class="fa-regular fa-envelope"></i> haseebcollection903@gmail.com</p>
-                    <p><i class="fa-regular fa-clock"></i> Sun-Fri: 9AM - 12PM</p>
+                    <p><i class="fa-regular fa-clock"></i> Daily 9AM - 12PM</p>
                 </div>
                 <form class="contact-form">
                     <input type="text" placeholder="Your Name" required>
@@ -2195,7 +2294,7 @@ document.addEventListener('DOMContentLoaded', function() {
                 </p>
 
                 <div class="size-selector">
-                    <h3>Color Type:</h3>
+                    <h3>Quantity:</h3>
                     <div class="size-options" id="size-options">
                         <!-- Size options will be added dynamically -->
                     </div>
@@ -2389,6 +2488,42 @@ document.addEventListener('DOMContentLoaded', function() {
 
 </body>
     <script>
+  const backToTopBtn = document.getElementById('backToTop');
+        const progressCircle = document.querySelector('.progress-ring-circle');
+        const circumference = 2 * Math.PI * 24; // 2πr (r=24 because diameter=50-2=48)
+        
+        // Set initial stroke-dasharray and stroke-dashoffset
+        progressCircle.style.strokeDasharray = circumference;
+        progressCircle.style.strokeDashoffset = circumference;
+        
+        window.addEventListener('scroll', function() {
+            // Calculate scroll progress (0 to 1)
+            const scrollHeight = document.documentElement.scrollHeight - window.innerHeight;
+            const scrollPosition = window.scrollY;
+            const scrollProgress = Math.min(scrollPosition / scrollHeight, 1);
+            
+            // Update progress circle
+            const offset = circumference - (scrollProgress * circumference);
+            progressCircle.style.strokeDashoffset = offset;
+            
+            // Show/hide button (only appears after scrolling down 300px)
+            if (scrollPosition > 300) {
+                backToTopBtn.style.display = 'flex';
+            } else {
+                backToTopBtn.style.display = 'none';
+            }
+        });
+        
+        backToTopBtn.addEventListener('click', function() {
+            window.scrollTo({
+                top: 0,
+                behavior: 'smooth'
+            });
+        });
+
+
+
+
         
         const reviewCards = document.querySelectorAll('.review-card');
 
@@ -2550,7 +2685,7 @@ updateCart();
                     "https://images.unsplash.com/photo-1576566588028-4147f3842f27?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1664&q=80",
                     "https://images.unsplash.com/photo-1527719327859-c6ce80353573?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1664&q=80"
                 ],
-                sizes: ["XS", "S", "M", "L", "XL"]
+                 sizes: ["1", "2", "3", "4"]
             },
             2: {
                 title: "Utility Overshirt",
@@ -2561,7 +2696,7 @@ updateCart();
                     "https://images.unsplash.com/photo-1591047139829-d91aecb6caea?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1736&q=80",
                     "https://images.unsplash.com/photo-1591047139829-d91aecb6caea?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1736&q=80"
                 ],
-                sizes: ["S", "M", "L", "XL"]
+                 sizes: ["1", "2", "3", "4"]
             },
             3: {
                 title: "Tactical Cargo Pants",
@@ -2572,7 +2707,7 @@ updateCart();
                     "https://images.unsplash.com/photo-1551232864-3f0890e580d9?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=687&q=80",
                     "https://images.unsplash.com/photo-1551232864-3f0890e580d9?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=687&q=80"
                 ],
-                sizes: ["28", "30", "32", "34", "36"]
+                 sizes: ["1", "2", "3", "4"]
             },
             4: {
                 title: "Essential Hoodie",
@@ -2583,7 +2718,7 @@ updateCart();
                     "https://static.vecteezy.com/system/resources/previews/013/144/078/non_2x/pair-of-blue-running-sneakers-on-white-background-isolated-photo.jpg",
                     "https://static.vecteezy.com/system/resources/thumbnails/013/143/819/small/blue-running-sneaker-on-blue-background-close-up-photo.jpg"
                 ],
-                sizes: ["S", "M", "L", "XL"]
+                 sizes: ["1", "2", "3", "4"]
             },
              5: {
                 title: "Tactical Cargo Pants",
@@ -2594,7 +2729,7 @@ updateCart();
                     "https://images.unsplash.com/photo-1551232864-3f0890e580d9?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=687&q=80",
                     "https://images.unsplash.com/photo-1551232864-3f0890e580d9?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=687&q=80"
                 ],
-                sizes: ["28", "30", "32", "34", "36"]
+                 sizes: ["1", "2", "3", "4"]
             },
              6: {
                 title: "Kurta For Men",
@@ -2605,7 +2740,7 @@ updateCart();
                     "https://i.pinimg.com/736x/07/23/af/0723af8221e36851ea8aa533bd9aabf8.jpg",
                     "https://d2wvwvig0d1mx7.cloudfront.net/data/org/194/media/img/cache/768x0/1702180_768x0.jpg"
                 ],
-                sizes: ["28", "30", "32", "34", "36"]
+                 sizes: ["1", "2", "3", "4"]
             },
              7: {
                 title: "Tactical Cargo Pants",
@@ -2616,7 +2751,7 @@ updateCart();
                     "https://images.unsplash.com/photo-1551232864-3f0890e580d9?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=687&q=80",
                     "https://images.unsplash.com/photo-1551232864-3f0890e580d9?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=687&q=80"
                 ],
-                sizes: ["28", "30", "32", "34", "36"]
+                 sizes: ["1", "2", "3", "4"]
             },
              8: {
                 title: "Tactical Cargo Pants",
@@ -2627,7 +2762,7 @@ updateCart();
                     "https://images.unsplash.com/photo-1551232864-3f0890e580d9?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=687&q=80",
                     "https://images.unsplash.com/photo-1551232864-3f0890e580d9?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=687&q=80"
                 ],
-                sizes: ["28", "30", "32", "34", "36"]
+                sizes: ["1", "2", "3", "4"]
             }
         };
 
