@@ -2198,12 +2198,58 @@ document.addEventListener('DOMContentLoaded', function() {
 <br><br>
          <h5 style="margin-top: -3px;">OUR IDENTITY</h5>
             <h2  class="section-title" style="font-weight: 500;">STYLE IN MOTION</h2>
+<style>
+/* Default (for desktop) */
+.video-section {
+    margin: 0;
+    padding: 0;
+    overflow: hidden;
+    width: 100vw;
+    height: 500px;
+    position: relative;
+    margin-top: 1rem;
+}
 
+.video-container {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+}
 
-<section class="video-section" id="video-section" style="margin: 0; padding: 0; overflow: hidden; width: 100vw; height: 500px; position: relative; margin-top: 1rem;">
-    <div class="video-container" style="position: absolute; top: 0; left: 0; width: 100%; height: 100%;">
-        <video autoplay muted loop playsinline
-            style="width: 100%; height: 100%; object-fit: cover; display: block;">
+.video-container video {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
+}
+
+/* For screens under 450px */
+@media (max-width: 450px) {
+    .video-section {
+        height: 390px;
+    }
+}
+
+/* For extremely small screens (under 350px) */
+@media (max-width: 350px) {
+    .video-section {
+        height: 300px;
+    }
+}
+
+/* For ultra-small (watch-size or narrow phones) under 280px */
+@media (max-width: 400px) {
+    .video-section {
+        height: 240px;
+    }
+}
+</style>
+
+<section class="video-section" id="video-section">
+    <div class="video-container">
+        <video autoplay muted loop playsinline>
             <source src="video.mp4" type="video/mp4">
             <source src="video.mp4" type="video/webm">
             Your browser does not support HTML5 video.
@@ -2211,14 +2257,6 @@ document.addEventListener('DOMContentLoaded', function() {
     </div>
 </section>
 
-<!-- Responsive video height -->
-<style>
-@media (max-width: 450px) {
-    .video-section {
-        height: 200px;
-    }
-}
-</style>
 
 
 
@@ -3304,3 +3342,4 @@ updateCart();
     </script>
 </body>
 </html>
+   
